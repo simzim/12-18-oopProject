@@ -4,15 +4,22 @@ class Dish {
     #description;
     #category;
 
+    static dishCounter = 0;
+    static allDishes = [];
+
     //konstruktorius
 
     constructor(name, price, category, description = 'nera aprašymo'){
+        Dish.dishCounter++;
         this.#name = name;
         this.#price = price;
         this.#category = category;
         category.addDish(this);
 
         this.#description = description;
+
+        Dish.allDishes.push(this);
+
     }
 
     // Get'eriai
@@ -61,6 +68,8 @@ class Dish {
                 kategorija: ${this.#category.getCategoryName()} `;
     }
 
-
+    static getAllDishes(){
+        return Dish.allDishes;
+    }
 }
 export default Dish;
