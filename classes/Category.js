@@ -1,11 +1,17 @@
 import Menu from './Menu.js';
 
 class Category {
+
+    #id;
     #categoryName;
     #dishesList;
     // aprasymas = 'tuscias';
 
+    static categoryCounter = 0;
+
     constructor(name, menu){
+        Category.categoryCounter++;
+        this.#id = Category.categoryCounter;
         this.#categoryName = name;
         this.#dishesList = [];
 
@@ -14,6 +20,10 @@ class Category {
         } else {
             throw new Error('pateiktas parametras nepriklauso Menu klasei');
         }
+    }
+
+    getId(){
+        return this.#id;
     }
 
     getCategoryName(){
