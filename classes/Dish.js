@@ -1,3 +1,5 @@
+import Menu from './Menu.js';
+
 class Dish {
     #name;
     #price;
@@ -9,14 +11,28 @@ class Dish {
 
     //konstruktorius
 
-    constructor(name, price, category, description = 'nera aprašymo'){
+    constructor(name, price, categoryId, menu, description = 'nera aprašymo'){
         Dish.dishCounter++;
         this.#name = name;
         this.#price = price;
-        this.#category = category;
-        category.addDish(this);
-
         this.#description = description;
+        // this.#category = category;
+        // category.addDish(this);
+
+        if(menu instanceof Menu){
+            const kategorija = menu.getCategories().find(c => c.getId() == categoryId);
+
+            if (kategorija){
+                this.#category = kategorija;
+                kategorija.addDish(this);
+                console.log(`patiekalas ipusintas ${Dish.dishCounter} , ${kategorija.getCategoryName()}`)
+           } else {
+                throw new Error('Kategorija nerasta.')
+           }
+
+        } else {
+            throw new Error('pateiktas parametras nepriklauso Menu klasei');
+        }
 
         Dish.allDishes.push(this);
 

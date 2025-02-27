@@ -15,8 +15,8 @@ const drinks = new Category('Gėrimai', mainMenu);
 
 console.log(mainMenu);
 
-const cake = new Dish('Tortas', 4.5, dessert);
-const iceCream = new Dish('Ledai', 3.8, dessert, 'patys skaniausi');
+const cake = new Dish('Tortas', 4.5, 1, mainMenu);
+const iceCream = new Dish('Ledai', 3.8, 1, mainMenu, 'patys skaniausi');
 
 console.log(mainMenu);
 
@@ -90,13 +90,32 @@ function displayAddDishForm(){
                 <option value="">Pasirinkte Kategoriją</option>
                 ${mainMenu.getCategories().map((cat) => 
                     `<option value='${cat.getId()}'>${cat.getCategoryName()}</option>`)}
-            
             </select>
-
-
             <button class="btn" type="submit">Išsaugoti Patiekalą</button>
         </form> 
     `
+
+    const dishForm = document.getElementById('addDishForm');
+
+    dishForm.addEventListener('submit', (e) =>{
+        e.preventDefault();
+
+        const dishName = e.target.dishName.value;
+        const dishPrice = e.target.dishPrice.value;
+        const categoryId = e.target.categorySelect.value;
+        const description = e.target.dishDescription.value;
+
+        // console.log(`patiekalo pavadinimas ${dishName}`)
+        // console.log(`patiekalo kaina ${dishPrice}`)
+        // console.log(`patiekalo pavadinimas ${category}`)
+        // console.log(`patiekalo pavadinimas ${description}`)
+
+        const newDish = new Dish(dishName, dishPrice, categoryId, mainMenu, description)
+        e.target.reset();
+    })
+
+
+
 }
 
 
