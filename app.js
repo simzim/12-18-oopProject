@@ -17,7 +17,10 @@ console.log(mainMenu);
 
 const cake = new Dish('Tortas', 4.5, 1, mainMenu);
 const iceCream = new Dish('Ledai', 3.8, 1, mainMenu, 'patys skaniausi');
-
+const cafe = new Dish('Kava', 3, 4, mainMenu);
+const tea = new Dish('Arbata', 2, 4, mainMenu);
+const oml = new Dish('Omletas', 7, 2, mainMenu);
+const sum = new Dish('Sumuštinis', 5, 2, mainMenu);
 console.log(mainMenu);
 
 //________________________________________________
@@ -111,13 +114,21 @@ function displayAddDishForm(){
         // console.log(`patiekalo pavadinimas ${description}`)
 
         const newDish = new Dish(dishName, dishPrice, categoryId, mainMenu, description)
+        console.log(mainMenu)
         e.target.reset();
     })
-
-
-
 }
 
+//_____________________________________________________
+//__________HTML turinio kurimas_-> PATIEKALU SARASAS___
+
+const showDishList = document.getElementById('showDishList');
+
+showDishList.addEventListener('click', ()=>displayDishList());
+
+function displayDishList() {
+    content.innerHTML = mainMenu.generateDishList();
+}
 
 
 
