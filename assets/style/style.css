@@ -88,3 +88,10 @@ table {
   th {
     background-color: rgba(172, 255, 47, 0.444);
   }
+
+  .action-btn {
+    background: none;
+    border: none;
+    margin: 5px 10px;
+    cursor: pointer;
+  }

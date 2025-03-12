@@ -65,7 +65,7 @@ const showCategoryList = document.getElementById('showCategoryList');
 showCategoryList.addEventListener('click', () => displayCategoryList())
 
 function displayCategoryList(){
-    content.innerHTML = mainMenu.generateInnerHTML();
+    content.innerHTML = mainMenu.generateCategoryHTML();
 }
 
 //________________________________________________
