@@ -1,11 +1,15 @@
 import Dish from './classes/Dish.js';
 import Category from './classes/Category.js';
 import Menu from './classes/Menu.js';
+import UI from './classes/UI.js';
 
-
+const content = document.getElementById('content');
 // Susikuriam meniu
 const mainMenu = new Menu();
 console.log(mainMenu);
+
+
+
 
 // prisidedam kategorija
 const dessert = new Category('Desertai', mainMenu);
@@ -26,47 +30,23 @@ console.log(mainMenu);
 //________________________________________________
 //__________HTML turinio kurimas_-> prideti kategorija________
 
-const content = document.getElementById('content');
-
 const showCategoryForm = document.getElementById('addCategoryOption');
-showCategoryForm.addEventListener('click', () => displayAddCategoryForm() )
+showCategoryForm.addEventListener('click', () => UI.displayCategoryForm(mainMenu, content))
 
-function displayAddCategoryForm(){
-    
-    content.innerHTML = `
-        <h2>Pridėti naują Kategoriją</h2>
-        <form id="addCategoryForm" class="addForm">
-            <label for="CategoryName">Kategorijos pavadinimas</label>
-            <input type="text" id="CategoryName" required>
 
-            <button class="btn" type="submit">Išsaugoti Kategoriją</button>
-
-        </form>
-    `;
-
-    const categoryForm = document.getElementById('addCategoryForm');
-    categoryForm.addEventListener('submit', (e) =>{
-        e.preventDefault();
-        const categoryName = e.target.CategoryName.value;
-        // console.log(`kategorijos pavadinimas ${categoryName}`)
-
-        const newCategory = new Category(categoryName, mainMenu)
-        console.log(`kategorijos objektas ${newCategory.getCategoryName()}`)
-
-        e.target.reset();
-    })
-}
+const showCategoryList = document.getElementById('showCategoryList');
+showCategoryList.addEventListener('click', () => UI.displayCategoryList(mainMenu, content))
 
 //________________________________________________
 //__________HTML turinio kurimas -> parodyti kategorijas______
 
-const showCategoryList = document.getElementById('showCategoryList');
 
-showCategoryList.addEventListener('click', () => displayCategoryList())
 
-function displayCategoryList(){
-    content.innerHTML = mainMenu.generateCategoryHTML();
-}
+
+
+// function displayCategoryList(){
+//     content.innerHTML = mainMenu.generateCategoryHTML();
+// }
 
 //________________________________________________
 //__________HTML turinio kurimas_-> prideti patiekala________
