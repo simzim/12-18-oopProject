@@ -1,44 +1,53 @@
 import Menu from './Menu.js';
 
 class Dish {
+    #id;
     #name;
     #price;
     #description;
     #category;
 
     static dishCounter = 0;
-    static allDishes = [];
+    // static allDishes = [];
 
     //konstruktorius
 
-    constructor(name, price, categoryId, menu, description = 'nera aprašymo'){
+    constructor(name, price, description = 'nera aprašymo'){
         Dish.dishCounter++;
+        this.#id = Dish.dishCounter;
         this.#name = name;
         this.#price = price;
         this.#description = description;
+        this.#category = null;
+
         // this.#category = category;
         // category.addDish(this);
 
-        if(menu instanceof Menu){
-            const kategorija = menu.getCategories().find(c => c.getId() == categoryId);
+        // if(menu instanceof Menu){
+        //     const kategorija = menu.getCategories().find(c => c.getId() == categoryId);
 
-            if (kategorija){
-                this.#category = kategorija;
-                kategorija.addDish(this);
-                console.log(`patiekalas ipusintas ${Dish.dishCounter} , ${kategorija.getCategoryName()}`)
-           } else {
-                throw new Error('Kategorija nerasta.')
-           }
+        //     if (kategorija){
+        //         this.#category = kategorija;
+        //         kategorija.addDish(this);
+        //         console.log(`patiekalas ipusintas ${Dish.dishCounter} , ${kategorija.getCategoryName()}`)
+        //    } else {
+        //         throw new Error('Kategorija nerasta.')
+        //    }
 
-        } else {
-            throw new Error('pateiktas parametras nepriklauso Menu klasei');
-        }
+        // } else {
+        //     throw new Error('pateiktas parametras nepriklauso Menu klasei');
+        // }
 
-        Dish.allDishes.push(this);
+        // Dish.allDishes.push(this);
 
     }
 
     // Get'eriai
+
+    getId (){
+        return this.#id;
+    }
+
     getName(){
         return this.#name;
     }    
@@ -74,7 +83,7 @@ class Dish {
     }
 
     setCategory(newCategory){
-        this.#category.setCategoryName(newCategory);
+        this.#category = newCategory;
     }
 
     getInfo(){

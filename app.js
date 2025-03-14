@@ -9,22 +9,20 @@ const mainMenu = new Menu();
 console.log(mainMenu);
 
 
-
-
 // prisidedam kategorija
-const dessert = new Category('Desertai', mainMenu);
-const morning = new Category('Pusryčių meniu', mainMenu);
-const dinner = new Category('Karšti Patiekalai', mainMenu);
-const drinks = new Category('Gėrimai', mainMenu);
+mainMenu.addCategory('Desertai');
+mainMenu.addCategory('Pusryčių meniu');
+mainMenu.addCategory('Karšti Patiekalai');
+mainMenu.addCategory('Gėrimai');
 
 console.log(mainMenu);
 
-const cake = new Dish('Tortas', 4.5, 1, mainMenu);
-const iceCream = new Dish('Ledai', 3.8, 1, mainMenu, 'patys skaniausi');
-const cafe = new Dish('Kava', 3, 4, mainMenu);
-const tea = new Dish('Arbata', 2, 4, mainMenu);
-const oml = new Dish('Omletas', 7, 2, mainMenu);
-const sum = new Dish('Sumuštinis', 5, 2, mainMenu);
+mainMenu.addDish('Tortas', 4.5, 1);
+mainMenu.addDish('Ledai', 3.8, 1, 'patys skaniausi');
+mainMenu.addDish('Kava', 3, 4);
+mainMenu.addDish('Arbata', 2, 4);
+mainMenu.addDish('Omletas', 7, 2);
+mainMenu.addDish('Sumuštinis', 5, 2);
 console.log(mainMenu);
 
 //________________________________________________

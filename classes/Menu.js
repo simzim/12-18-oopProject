@@ -1,99 +1,57 @@
+import Category from "./Category.js";
+import Dish from "./Dish.js";
 class Menu {
+
     constructor() {
         this.categories = [];
+        this.allDishes = [];
     }
 
     getCategories() {
         return this.categories;
     }
 
-    addCategory(category) {
+    getAllDishes() {
+        return this.allDishes;
+    }
+
+    addCategory(name) {
+        const category = new Category(name)
         this.categories.push(category);
+        return category
+    }
+
+    addDish(name, price, categoryId, description) {
+
+        const category = this.categories.find(cat => cat.getId() === categoryId)
+        if(!category) throw new Error('kategorija nerasta')
+
+        const dish = new Dish(name, price, description);
+        dish.setCategory(category);
+        category.addDish(dish);
+        this.allDishes.push(dish);
     }
 
     editCategory(categoryId){
         const category = this.categories.find(cat => cat.getId() === parseInt(categoryId));
         return category;
     }
-    // generateCategoryHTML() {
-    //     let htmlContent = `<table>
-    //     <tr>
-    //         <th>Eil. nr.</th>
-    //         <th>Pavadinimas</th>
-    //         <th>Veiksmai</th>
-    //     </tr>
-    //     `;
-    //     let counter = 0;
-    //     this.categories.forEach(cat => {
-    //         htmlContent += 
-    //         `
-    //          <tr>
-    //             <td>${++counter}</td>
-    //             <td>${cat.getCategoryName()}</td>
-    //             <td>
-    //                 <button data-category-id="${cat.getId()}" class="action-btn edit-button" >
-    //                     <img src="../assets/img/edit.png" width='25' >
-    //                 </button>
-    //                 <button data-category-id="${cat.getId()}" class="action-btn delete-button" >
-    //                     <img src="../assets/img/delete.png" width='25' >
-    //                 </button>
-                
-    //             </td>
-    //         </tr>
-    //     `
-    //     });
-    //     htmlContent += `</table>`;
+    
 
-    //     this.attachEditListeners();
-    //     return htmlContent;
-    // }
+    removeCategory(categoryId){
+        const categeryIndex = this.categories.findIndex(cat => cat.getId() === parseInt(categoryId))
+        if(categeryIndex === -1) throw new Error('Kategorija nerasta');
 
-    // attachEditListeners(){
-    //     setTimeout(() => {
-    //             const editButtons = document.querySelectorAll('.edit-button');
-    //             editButtons.forEach(button => {
-    //             button.addEventListener('click', (e) => {
-    //                 const categoryId = e.target.closest('button').dataset.categoryId;
-    //                 // console.log(categoryId);
-    //                 this.editCategory(categoryId);
-    //             });
-    //         });
-    //     }, 0);
-    // }
+        const category = this.categories[categeryIndex];
 
-    // editCategory(categoryId){
+        category.getDishesList().forEach(dish =>{
+            dish.setCategory(null);
+        })
 
-    //     const category = this.categories.find(cat => cat.getId() === parseInt(categoryId));
+        this.categories.splice(categeryIndex, 1);
+    
+    }
 
-    //     if(category){
-    //         const content = document.getElementById('content');
-    //         content.innerHTML = this.getEditFormHTML(category);
-
-    //         const editForm = document.getElementById('editCategoryForm');
-    //         editForm.addEventListener('submit', (e) =>{
-    //             e.preventDefault();
-    //             const newCategoryName = e.target.editCategoryName.value;
-    //             category.setCategoryName(newCategoryName);
-
-    //             content.innerHTML = this.generateCategoryHTML();
-
-    //         })
-
-
-    //     }
-    // }
-
-
-    // getEditFormHTML(category){
-    //     return `
-    //         <h2>Redaguoti Kategoriją</h2>
-    //     <form id="editCategoryForm" class="addForm">
-    //         <label for="editCategoryName">Kategorijos pavadinimas</label>
-    //         <input type="text" id="editCategoryName" value="${category.getCategoryName()}" required>
-    //         <button class="btn" type="submit">Išsaugoti Kategoriją</button>
-    //     </form>
-    //     `
-    // }
 
 
     generateDishList() {

@@ -96,6 +96,23 @@ class UI {
                     UI.displayCategoryForm(menu, contentElement, category)
                 });
             });
+
+            const deleteButtons = document.querySelectorAll('.delete-button');
+            deleteButtons.forEach(button  => {
+                button.addEventListener('click', (e) => {
+                    const categoryId = e.target.closest('button').dataset.categoryId;
+
+                    if(confirm('Ar tikrai norite ištrinti kategoriją?')){
+                        menu.removeCategory(categoryId);
+                        UI.displayCategoryList(menu, contentElement)
+                    }
+                
+                    
+                });
+            })
+
+
+
         }, 0);
     }
 
