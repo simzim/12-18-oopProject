@@ -23,7 +23,7 @@ class Menu {
 
     addDish(name, price, categoryId, description) {
 
-        const category = this.categories.find(cat => cat.getId() === categoryId)
+        const category = this.categories.find(cat => cat.getId() === parseInt(categoryId))
         if(!category) throw new Error('kategorija nerasta')
 
         const dish = new Dish(name, price, description);
@@ -50,33 +50,6 @@ class Menu {
 
         this.categories.splice(categeryIndex, 1);
     
-    }
-
-
-
-    generateDishList() {
-        let htmlContent = `<table>`
-        this.categories.forEach(cat => {
-            htmlContent += `
-                <tr>
-                    <th>Kategorija:</th>
-                    <th colspan='2'>${cat.getCategoryName()}</th>
-                </tr>
-   
-            `;
-            cat.getDishesList().forEach(dish => {
-                htmlContent += `
-                <tr>
-                    <td>${dish.getName()}</td>
-                    <td>${dish.getPrice()} eur</td>
-                    <td>${dish.getDescription()}</td>
-                </tr>
-                `;
-            });
-        });
-        htmlContent += `</table>`
-
-        return htmlContent;
     }
 
 }

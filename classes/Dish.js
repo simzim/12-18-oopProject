@@ -1,4 +1,3 @@
-import Menu from './Menu.js';
 
 class Dish {
     #id;
@@ -8,7 +7,6 @@ class Dish {
     #category;
 
     static dishCounter = 0;
-    // static allDishes = [];
 
     //konstruktorius
 
@@ -19,27 +17,6 @@ class Dish {
         this.#price = price;
         this.#description = description;
         this.#category = null;
-
-        // this.#category = category;
-        // category.addDish(this);
-
-        // if(menu instanceof Menu){
-        //     const kategorija = menu.getCategories().find(c => c.getId() == categoryId);
-
-        //     if (kategorija){
-        //         this.#category = kategorija;
-        //         kategorija.addDish(this);
-        //         console.log(`patiekalas ipusintas ${Dish.dishCounter} , ${kategorija.getCategoryName()}`)
-        //    } else {
-        //         throw new Error('Kategorija nerasta.')
-        //    }
-
-        // } else {
-        //     throw new Error('pateiktas parametras nepriklauso Menu klasei');
-        // }
-
-        // Dish.allDishes.push(this);
-
     }
 
     // Get'eriai
@@ -61,7 +38,7 @@ class Dish {
     }    
     
     getCategory(){
-        return this.#category.getCategoryName();
+        return this.#category ? this.#category.getCategoryName() : "Nėra Kategorijos";
     }
 
     // Set'eriai
